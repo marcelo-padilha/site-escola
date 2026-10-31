@@ -16,39 +16,12 @@ collections:
       - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
       - {label: "Conteúdo", name: "body", widget: "markdown"}
 
+  # COLEÇÃO DE PÁGINAS DINÂMICAS (PERMITE "ADICIONAR NOVA")
   - name: "paginas"
     label: "Páginas do Site"
-    delete: false
-    files:
-      - name: "home"
-        label: "Página Principal (Início)"
-        file: "src/index.njk"
-        fields:
-          - {label: "Título da Página", name: "title", widget: "string", default: "Projeto de Extensão Tutoria ENEM"}
-          
-          # SECÇÃO DE APRESENTAÇÃO (HERO)
-          - label: "Apresentação Principal"
-            name: "hero"
-            widget: "object"
-            fields:
-              - {label: "Texto explicativo", name: "text", widget: "text"}
-              - {label: "Texto do Botão", name: "button_text", widget: "string", default: "Apresentação"}
-              - {label: "Link do Botão", name: "button_link", widget: "string", default: "/paginas/apresentacao"}
-              - {label: "Imagem do Banner", name: "banner_image", widget: "image", required: false}
-
-          # CARDS DE ACESSO RÁPIDO
-          - label: "Banners de Acesso Rápido"
-            name: "quick_cards"
-            widget: "list"
-            fields:
-              - {label: "Título do Card", name: "title", widget: "string"}
-              - {label: "Link do Card", name: "link", widget: "string"}
-              - {label: "Ícone FontAwesome (ex: fas fa-edit)", name: "icon", widget: "string", default: "fas fa-link"}
-
-          # BARRA LATERAL
-          - label: "Barra Lateral"
-            name: "sidebar"
-            widget: "object"
-            fields:
-              - {label: "Título do Bloco", name: "title", widget: "string", default: "Pesquisar"}
-              - {label: "Texto de Ajuda na Busca", name: "search_placeholder", widget: "string", default: "Buscar no site..."}
+    folder: "src/paginas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título da Página", name: "title", widget: "string"}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}

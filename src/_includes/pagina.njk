@@ -1,0 +1,139 @@
+---
+layout: layout.njk
+---
+
+<style>
+  /* Estilos específicos da página interna UFJF */
+  .wp-header-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 2px solid var(--ufjf-blue);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+  }
+  .wp-header-row img {
+    height: 45px;
+  }
+  .wp-header-row h2 {
+    font-size: 1.4rem;
+    color: var(--ufjf-blue);
+    margin: 0;
+  }
+  .wp-header-row h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .wp_innerpage_header h1 {
+    font-size: 1.8rem;
+    color: #222;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .content {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #333;
+    background: #fff;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+  }
+
+  .content h1, .content h2, .content h3 {
+    color: var(--ufjf-blue);
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+  .content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 4px;
+  }
+
+  /* Barra de Ações / Compartilhamento */
+  .page-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .share-btn {
+    padding: 6px 12px;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .share-email { background-color: #6c757d; }
+  .share-facebook { background-color: #3b5998; }
+  .share-twitter { background-color: #000000; }
+
+  .nav-icons a {
+    color: #333;
+    font-size: 1.3rem;
+    margin-left: 15px;
+    text-decoration: none;
+  }
+</style>
+
+<!-- Cabeçalho Institucional Secundário -->
+<div class="wp-header-row">
+  <div>
+    <a href="/">
+      <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="8" fill="#003366"/>
+        <path d="M20 30H80V40H20V30ZM20 48H80V58H20V48ZM20 66H55V76H20V66Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div>
+    <h2><a href="/">Projeto de Extensão Tutoria ENEM</a></h2>
+  </div>
+</div>
+
+<!-- Conteúdo Dinâmico da Página -->
+<article class="wp_innerpage_header">
+  <h1>{{ title }}</h1>
+  
+  <div class="content">
+    {{ content | safe }}
+
+    <!-- Botões de Compartilhamento e Ações -->
+    <div class="page-actions-row">
+      <div class="share-buttons">
+        <a href="mailto:?Subject={{ title }}&body={{ page.url }}" class="share-btn share-email">
+          <i class="fas fa-envelope"></i> e-mail
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url }}" target="_blank" class="share-btn share-facebook">
+          <i class="fab fa-facebook"></i> facebook
+        </a>
+        <a href="https://x.com/intent/tweet?url={{ page.url }}" target="_blank" class="share-btn share-twitter">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+      </div>
+
+      <div class="nav-icons">
+        <a href="/" title="Voltar para a página inicial"><i class="fas fa-home"></i></a>
+        <a href="#" title="Ir para o topo da página"><i class="fas fa-arrow-up"></i></a>
+      </div>
+    </div>
+  </div>
+</article>
