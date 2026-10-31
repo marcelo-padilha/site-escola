@@ -14,4 +14,32 @@ collections:
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
-      - {label: "Conteúdo", name: "body", widget: "markdown"}  
+      - {label: "Conteúdo", name: "body", widget: "markdown"} 
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "noticias"
+    label: "Notícias da Escola"
+    folder: "src/noticias"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}
+
+  # NOVA COLEÇÃO PARA GERIR PÁGINAS DO SITE
+  - name: "paginas"
+    label: "Páginas do Site"
+    folder: "src/paginas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título da Página", name: "title", widget: "string"}
+      - {label: "Conteúdo da Página", name: "body", widget: "markdown"} 
