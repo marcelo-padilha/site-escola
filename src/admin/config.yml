@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "paginas"
+    label: "Páginas da Escola"
+    folder: "src/paginas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}
