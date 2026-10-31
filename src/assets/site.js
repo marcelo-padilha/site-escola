@@ -1,29 +1,36 @@
 (() => {
-  const toggle = document.querySelector("[data-menu-toggle]");
-  const navigation = document.querySelector("[data-site-nav]");
+  // Mantém a cor da interface do navegador coerente com a combinação selecionada no site.
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) {
+    const brandColor = getComputedStyle(document.body).getPropertyValue('--brand').trim();
+    if (brandColor) themeMeta.setAttribute('content', brandColor);
+  }
+
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const navigation = document.querySelector('[data-site-nav]');
 
   if (!toggle || !navigation) return;
 
   const setMenuState = (isOpen) => {
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    navigation.classList.toggle("is-open", isOpen);
-    const icon = toggle.querySelector("i");
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    navigation.classList.toggle('is-open', isOpen);
+    const icon = toggle.querySelector('i');
     if (icon) {
-      icon.classList.toggle("fa-bars", !isOpen);
-      icon.classList.toggle("fa-times", isOpen);
+      icon.classList.toggle('fa-bars', !isOpen);
+      icon.classList.toggle('fa-times', isOpen);
     }
   };
 
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
     setMenuState(!isOpen);
   });
 
-  navigation.addEventListener("click", (event) => {
-    if (event.target.closest("a")) setMenuState(false);
+  navigation.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenuState(false);
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setMenuState(false);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuState(false);
   });
 })();

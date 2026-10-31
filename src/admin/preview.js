@@ -109,8 +109,47 @@
     }
   });
 
+  var ThemePreview = createClass({
+    render: function () {
+      var entry = this.props.entry;
+      var theme = read(entry, "theme", "azul-dourado");
+      var labels = {
+        "azul-dourado": "Azul institucional + dourado",
+        "azul-turquesa": "Azul institucional + turquesa",
+        "verde-dourado": "Verde institucional + dourado",
+        "grafite-azul": "Grafite + azul claro"
+      };
+      var safeTheme = Object.prototype.hasOwnProperty.call(labels, theme) ? theme : "azul-dourado";
+
+      return h("div", { className: "preview-theme preview-theme--" + safeTheme },
+        h("div", { className: "preview-theme-heading" },
+          h("strong", {}, "Prévia da combinação de cores"),
+          h("span", {}, labels[safeTheme])
+        ),
+        h("div", { className: "preview-theme-topbar" }, "Portal institucional"),
+        h("div", { className: "preview-theme-nav" }, "INÍCIO　　APRESENTAÇÃO　　NOTÍCIAS"),
+        h("div", { className: "preview-theme-content" },
+          h("div", { className: "preview-theme-copy" },
+            h("small", {}, "EDUCAÇÃO • ESCOLA • COMUNIDADE"),
+            h("h2", {}, "Bem-vindo ao portal da nossa escola"),
+            h("p", {}, "Esta é uma amostra de como a combinação escolhida será aplicada aos elementos do site."),
+            h("span", { className: "preview-theme-button" }, "Conheça a escola")
+          ),
+          h("div", { className: "preview-theme-image" }, "Imagem de destaque")
+        ),
+        h("div", { className: "preview-theme-swatches" },
+          ["#e0a328", "#5ec4d2", "#70b6ce", "#3d6386", "#dfe0e0", "#2f5a29", "#b0b0b0", "#80848a", "#5e5d5c", "#4d4b4c"].map(function (color) {
+            return h("span", { key: color, title: color, style: { backgroundColor: color } });
+          })
+        )
+      );
+    }
+  });
+
   CMS.registerPreviewStyle("/admin/preview.css");
   CMS.registerPreviewTemplate("index", HomePreview);
+  CMS.registerPreviewTemplate("site", ThemePreview);
+  CMS.registerPreviewTemplate("configuracoes", ThemePreview);
   CMS.registerPreviewTemplate("paginas", PagePreview);
   CMS.registerPreviewTemplate("noticias", NewsPreview);
 })();

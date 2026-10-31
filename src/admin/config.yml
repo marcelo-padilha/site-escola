@@ -83,6 +83,17 @@ collections:
           - { label: "Nome curto", name: "short_title", widget: "string", required: false }
           - { label: "Descrição do site", name: "description", widget: "text", required: false }
           - { label: "Logotipo", name: "logo", widget: "image", required: false }
+          - label: "Combinação de cores do site"
+            name: "theme"
+            widget: "select"
+            options:
+              - { label: "Azul institucional + dourado (padrão da escola)", value: "azul-dourado" }
+              - { label: "Azul institucional + turquesa", value: "azul-turquesa" }
+              - { label: "Verde institucional + dourado", value: "verde-dourado" }
+              - { label: "Grafite + azul claro", value: "grafite-azul" }
+            default: "azul-dourado"
+            required: true
+            hint: "Escolha uma combinação pronta baseada nas cores da logo. A alteração será aplicada ao site após salvar e publicar."
           - { label: "Texto da barra superior", name: "topbar_text", widget: "string", required: false }
           - label: "Menu principal"
             name: "navigation"

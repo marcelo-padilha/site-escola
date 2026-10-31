@@ -33,6 +33,12 @@ src/
 └── noticias.njk               # Arquivo público de notícias
 ```
 
+## Ajuste da apresentação inicial (16:9)
+
+A folha `src/assets/site.css` foi atualizada para deixar o bloco de apresentação mais compacto e dar mais largura à imagem de destaque. Em telas maiores, o texto ocupa aproximadamente 36% da composição e a imagem 64%, com proporção 16:9. Em telas menores, os blocos ficam empilhados e a imagem mantém a mesma proporção.
+
+Se o projeto já estiver instalado, basta substituir `src/assets/site.css` pelo arquivo desta versão. Não é necessário alterar `home.json` nem executar `npm install` novamente para essa mudança de estilo.
+
 ## Preparar no VS Code
 
 Abra a pasta do projeto no VS Code e execute no terminal:
@@ -96,3 +102,17 @@ As URLs de páginas usam o nome do arquivo, por exemplo `apresentacao.md` gera `
 2. A coleção de páginas desta primeira etapa cria páginas com URL própria a partir do nome do arquivo. A organização visual por níveis e menus pode ser ampliada depois, sem mudar a base atual.
 3. Os arquivos `backup-conteudo/` preservam dois arquivos originais que continham conteúdo de teste ou comandos Git. Eles foram retirados de `src/` para não serem publicados acidentalmente.
 4. Antes de publicar em produção, confira no Netlify se o Identity e o Git Gateway continuam habilitados e se o domínio do site está autorizado.
+
+
+## Paleta de cores da escola
+
+A cor do site é escolhida no painel em **Identidade e configurações → Combinação de cores do site**. Estão disponíveis quatro combinações predefinidas, formadas com as cores informadas da identidade visual:
+
+- Azul institucional + dourado (padrão): `#3d6386`, `#4d4b4c`, `#e0a328` e tons complementares da logo.
+- Azul institucional + turquesa: `#3d6386`, `#5ec4d2` e `#70b6ce`.
+- Verde institucional + dourado: `#2f5a29` e `#e0a328`.
+- Grafite + azul claro: `#5e5d5c`, `#4d4b4c` e `#70b6ce`.
+
+A seleção é salva em `src/_data/site.json`, na propriedade `theme`. O template aplica essa opção no atributo `data-theme` do `body`; as variáveis de cor ficam centralizadas em `src/assets/site.css`. Para adicionar uma nova combinação, inclua uma opção no `src/admin/config.yml` e a regra correspondente em `src/assets/site.css`.
+
+A paleta-base utiliza também `#dfe0e0`, `#b0b0b0`, `#80848a` (reserva neutra), `#5e5d5c` e `#2f5a29` como tons de apoio. Cores de texto e elementos de contraste foram escolhidas para manter legibilidade.
