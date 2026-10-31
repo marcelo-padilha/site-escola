@@ -15,6 +15,11 @@
       "icon": "fas fa-edit"
     },
     {
+      "title": "Matrícula",
+      "link": "/matricula/",
+      "icon": "document"
+    },
+    {
       "title": "Notícias",
       "link": "/noticias/",
       "icon": "fas fa-newspaper"
