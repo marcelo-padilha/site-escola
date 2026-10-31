@@ -1,6 +1,30 @@
 ---
 layout: layout.njk
 title: "Projeto de Extensão Tutoria ENEM"
+hero:
+  text: "O Projeto Tutoria ENEM é uma ação de extensão vinculada à Universidade Federal de Juiz de Fora. Oferece aulas gratuitas e materiais voltados à preparação dos estudantes."
+  button_text: "Apresentação"
+  button_link: "/paginas/apresentacao"
+  banner_image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+quick_cards:
+  - title: "Inscrição"
+    link: "#"
+    icon: "fas fa-edit"
+  - title: "Projetos"
+    link: "#"
+    icon: "fas fa-project-diagram"
+  - title: "Publicações"
+    link: "#"
+    icon: "fas fa-book"
+  - title: "Equipe"
+    link: "#"
+    icon: "fas fa-users"
+  - title: "Contato"
+    link: "#"
+    icon: "fas fa-envelope"
+sidebar:
+  title: "Pesquisar"
+  search_placeholder: "Buscar no site..."
 ---
 
 <style>
@@ -19,7 +43,6 @@ title: "Projeto de Extensão Tutoria ENEM"
 
   /* Layout Principal: Notícias (Esquerda) + Lateral (Direita) */
   .content-grid { display: grid; grid-template-columns: 9fr 3fr; gap: 25px; }
-
   .section-title { font-size: 1.3rem; color: var(--ufjf-blue); font-weight: bold; border-bottom: 2px solid var(--ufjf-blue); padding-bottom: 5px; margin-bottom: 20px; }
 
   /* Grelha de Notícias */
@@ -31,7 +54,7 @@ title: "Projeto de Extensão Tutoria ENEM"
   .news-card-title:hover { text-decoration: underline; }
   .news-card-excerpt { font-size: 0.85rem; color: #64748b; margin-bottom: 15px; }
 
-  /* Barra Lateral (Search) */
+  /* Barra Lateral */
   .sidebar-box { background: #ffffff; border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; margin-bottom: 20px; }
   .search-input { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.9rem; }
 
@@ -40,32 +63,38 @@ title: "Projeto de Extensão Tutoria ENEM"
   }
 </style>
 
-<!-- 1. APRESENTAÇÃO & BANNER -->
+<!-- 1. SECÇÃO DE APRESENTAÇÃO (EDITÁVEL) -->
 <section class="hero-grid">
   <div class="hero-text-card">
     <div>
-      <p>O <strong>Projeto Tutoria ENEM</strong> é uma ação de extensão vinculada à Universidade. Oferece aulas gratuitas e materiais voltados à preparação dos estudantes.</p>
+      <p>{{ hero.text }}</p>
     </div>
-    <a href="#" class="btn-ufjf">Apresentação &rarr;</a>
+    {% if hero.button_link and hero.button_text %}
+      <a href="{{ hero.button_link }}" class="btn-ufjf">{{ hero.button_text }} &rarr;</a>
+    {% endif %}
   </div>
   <div class="hero-banner">
-    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Banner do Projeto">
+    {% if hero.banner_image %}
+      <img src="{{ hero.banner_image }}" alt="Banner de Destaque">
+    {% else %}
+      <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Banner Padrão">
+    {% endif %}
   </div>
 </section>
 
-<!-- 2. CARDS DE DESTAQUE / ACESSO RÁPIDO -->
+<!-- 2. CARDS DE ACESSO RÁPIDO (EDITÁVEL) -->
 <section class="quick-cards">
-  <a href="#" class="quick-card"><i class="fas fa-edit"></i> Inscrição</a>
-  <a href="#" class="quick-card"><i class="fas fa-project-diagram"></i> Projetos</a>
-  <a href="#" class="quick-card"><i class="fas fa-book"></i> Publicações</a>
-  <a href="#" class="quick-card"><i class="fas fa-users"></i> Equipe</a>
-  <a href="#" class="quick-card"><i class="fas fa-envelope"></i> Contato</a>
+  {% for card in quick_cards %}
+    <a href="{{ card.link }}" class="quick-card">
+      <i class="{{ card.icon }}"></i> {{ card.title }}
+    </a>
+  {% endfor %}
 </section>
 
-<!-- 3. CORPO PRINCIPAL (NOTÍCIAS + BARRA LATERAL) -->
+<!-- 3. CORPO PRINCIPAL (NOTÍCIAS + LATERAL) -->
 <div class="content-grid">
   
-  <!-- Coluna da Esquerda: Grelha de Notícias -->
+  <!-- Esquerda: Notícias Gerenciadas pela Coleção de Notícias -->
   <div>
     <h2 class="section-title">Destaques e Notícias</h2>
     <div class="news-list">
@@ -86,16 +115,16 @@ title: "Projeto de Extensão Tutoria ENEM"
           </div>
         </article>
       {% else %}
-        <p>Nenhuma notícia cadastrada no CMS no momento.</p>
+        <p>Nenhuma notícia cadastrada no momento.</p>
       {% endfor %}
     </div>
   </div>
 
-  <!-- Coluna da Direita: Pesquisa e Mídia -->
+  <!-- Direita: Barra Lateral (EDITÁVEL) -->
   <aside>
     <div class="sidebar-box">
-      <h3 style="font-size: 1rem; color: var(--ufjf-blue); margin-bottom: 10px;">Pesquisar</h3>
-      <input type="text" class="search-input" placeholder="Buscar no site...">
+      <h3 style="font-size: 1rem; color: var(--ufjf-blue); margin-bottom: 10px;">{{ sidebar.title }}</h3>
+      <input type="text" class="search-input" placeholder="{{ sidebar.search_placeholder }}">
     </div>
   </aside>
 
