@@ -22,11 +22,16 @@
     "about_title": "Sobre a escola",
     "about_text": "Portal institucional da Escola Estadual Nyrce Villa Verde Coelho de Magalhães. \nEste espaço reúne informações, orientações e comunicados para a comunidade escolar.",
     "contact_title": "Contato",
-    "address": "",
-    "email": "",
-    "phone": "",
-    "social_links": [],
+    "address": "Rua Sady Monteiro Boechat, 175 SRE JUIZ DE FORA São Pedro Juiz de Fora 36037-250",
+    "email": "escola.342637@educacao.mg.gov.br",
+    "phone": "(32) 3215 2640",
+    "social_links": [
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/eenyrce.oficial/"
+      }
+    ],
     "copyright": "Escola Estadual Nyrce Villa Verde Coelho de Magalhães. Todos os direitos reservados."
   },
-  "theme": "verde-dourado"
+  "theme": "grafite-azul"
 }
