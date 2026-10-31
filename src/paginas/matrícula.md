@@ -37,6 +37,6 @@ Leve os seguintes documentos (original e cópia):
 
 ## **Para mais informações:** 
 
-* Rua Sady Monteiro Boechat, 175 SRE JUIZ DE FORA São Pedro Juiz de Fora 36037-250
+* Rua Sady Monteiro Boechat, 175 - SRE JUIZ DE FORA - São Pedro Juiz de Fora 36037-250
 * [escola.342637@educacao.mg.gov.br](mailto:escola.342637@educacao.mg.gov.br)
 * [(32) 3215 2640](<tel:(32) 3215 2640>)
