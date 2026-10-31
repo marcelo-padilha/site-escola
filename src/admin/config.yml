@@ -6,6 +6,7 @@ media_folder: "src/uploads"
 public_folder: "/uploads"
 
 collections:
+  # 1. NOTÍCIAS
   - name: "noticias"
     label: "Notícias da Escola"
     folder: "src/noticias"
@@ -16,12 +17,50 @@ collections:
       - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
       - {label: "Conteúdo", name: "body", widget: "markdown"}
 
-  # COLEÇÃO DE PÁGINAS DINÂMICAS (PERMITE "ADICIONAR NOVA")
+  # 2. PÁGINA PRINCIPAL (INDEX)
+  - name: "home_page"
+    label: "Página Principal (Início)"
+    delete: false
+    files:
+      - name: "index"
+        label: "Editar Página Inicial (Index)"
+        file: "src/index.njk"
+        fields:
+          - {label: "Título do Site", name: "title", widget: "string", default: "Projeto de Extensão Tutoria ENEM"}
+          - label: "Apresentação Principal"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Texto explicativo", name: "text", widget: "text"}
+              - {label: "Texto do Botão", name: "button_text", widget: "string", default: "Apresentação"}
+              - {label: "Link do Botão", name: "button_link", widget: "string", default: "/apresentacao"}
+              - {label: "Imagem do Banner", name: "banner_image", widget: "image", required: false}
+          - label: "Banners de Acesso Rápido"
+            name: "quick_cards"
+            widget: "list"
+            fields:
+              - {label: "Título do Card", name: "title", widget: "string"}
+              - {label: "Link do Card", name: "link", widget: "string"}
+              - {label: "Ícone FontAwesome", name: "icon", widget: "string", default: "fas fa-link"}
+          - label: "Barra Lateral"
+            name: "sidebar"
+            widget: "object"
+            fields:
+              - {label: "Título do Bloco", name: "title", widget: "string", default: "Pesquisar"}
+              - {label: "Texto de Ajuda na Busca", name: "search_placeholder", widget: "string", default: "Buscar no site..."}
+
+  # 3. NOVAS PÁGINAS E SUBPÁGINAS
   - name: "paginas"
-    label: "Páginas do Site"
+    label: "Páginas do Site (Subpáginas)"
     folder: "src/paginas"
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} — Link: https://nyrce-villa-verde.netlify.app/{{slug}}/"
     fields:
-      - {label: "Título da Página", name: "title", widget: "string"}
+      - {
+          label: "Título da Página", 
+          name: "title", 
+          widget: "string", 
+          hint: "O endereço final será: https://nyrce-villa-verde.netlify.app/[titulo-da-pagina]/"
+        }
       - {label: "Conteúdo", name: "body", widget: "markdown"}
