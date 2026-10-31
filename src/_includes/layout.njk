@@ -3,114 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "Projeto de Extensão e Tutoria" }}</title>
+  <title>{{ title or "Projeto de Extensão — Escola" }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
       --ufjf-blue: #003366;
-      --ufjf-blue-hover: #002244;
+      --ufjf-blue-hover: #001f3f;
+      --ufjf-card-bg: #003366;
       --bg-light: #f4f6f9;
-      --text-dark: #222222;
+      --text-main: #333333;
       --border-color: #e2e8f0;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.5; }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
+    /* Barra do Governo / Acessibilidade superior */
+    .top-bar { background: #002244; color: #ffffff; font-size: 0.8rem; padding: 4px 0; }
+    .top-bar .container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; }
+    .top-bar a { color: #ffffff; text-decoration: none; margin-left: 15px; }
 
     /* Cabeçalho Institucional */
-    header.main-header {
-      background-color: var(--ufjf-blue);
-      color: #ffffff;
-      padding: 1.5rem 2rem;
-      border-bottom: 4px solid #1a4d80;
-    }
+    header.ufjf-header { background: #ffffff; border-bottom: 3px solid var(--ufjf-blue); padding: 15px 0; }
+    .header-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; gap: 20px; }
+    .header-logo img { height: 50px; }
+    .header-title h1 { font-size: 1.5rem; color: var(--ufjf-blue); font-weight: 700; margin: 0; }
+    .header-title h1 a { color: inherit; text-decoration: none; }
 
-    header.main-header .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    /* Menu Navegação */
+    nav.main-nav { background: var(--ufjf-blue); }
+    .nav-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: flex; flex-wrap: wrap; }
+    .nav-container a { color: #ffffff; text-decoration: none; padding: 12px 18px; font-weight: 600; font-size: 0.9rem; display: block; transition: background 0.2s; }
+    .nav-container a:hover, .nav-container a.active { background: rgba(255,255,255,0.15); }
 
-    header.main-header h1 {
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
-
-    header.main-header p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    /* Navegação */
-    nav.main-nav {
-      background-color: #ffffff;
-      border-bottom: 1px solid var(--border-color);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    }
-
-    nav.main-nav .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      gap: 1.5rem;
-      padding: 0.8rem 2rem;
-    }
-
-    nav.main-nav a {
-      color: var(--ufjf-blue);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.95rem;
-    }
-
-    nav.main-nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* Conteúdo Principal */
-    .content-container {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-    }
+    /* Container Conteúdo */
+    .main-wrapper { max-width: 1140px; margin: 25px auto; padding: 0 15px; }
 
     /* Rodapé */
-    footer {
-      background-color: #1e293b;
-      color: #ffffff;
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-      font-size: 0.85rem;
+    footer.ufjf-footer { background: #1a202c; color: #cbd5e1; margin-top: 40px; padding: 40px 0 20px; font-size: 0.88rem; }
+    .footer-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; }
+    .footer-col h4 { color: #ffffff; margin-bottom: 12px; font-size: 1rem; border-bottom: 2px solid var(--ufjf-blue); padding-bottom: 5px; display: inline-block; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col a { color: #cbd5e1; text-decoration: none; }
+    .footer-col a:hover { color: #ffffff; }
+    .footer-bottom { text-align: center; border-top: 1px solid #334155; margin-top: 30px; padding-top: 15px; font-size: 0.8rem; color: #94a3b8; }
+
+    @media (max-width: 768px) {
+      .footer-container { grid-template-columns: 1fr; }
+      .header-container { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <header class="main-header">
+  <!-- Barra Superior -->
+  <div class="top-bar">
     <div class="container">
-      <h1>{{ title or "Projeto de Extensão / Escola" }}</h1>
-      <p>Portal Institucional e Informativo</p>
+      <span>Portal Institucional</span>
+      <div>
+        <a href="#conteudo">Ir para o conteúdo</a>
+        <a href="/admin/">Acesso Restrito</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header class="ufjf-header">
+    <div class="header-container">
+      <div class="header-logo">
+        <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="8" fill="#003366"/>
+          <path d="M20 30H80V40H20V30ZM20 48H80V58H20V48ZM20 66H55V76H20V66Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="header-title">
+        <h1><a href="/">{{ title or "Projeto de Extensão Tutoria ENEM" }}</a></h1>
+      </div>
     </div>
   </header>
 
+  <!-- Navegação -->
   <nav class="main-nav">
-    <div class="container">
-      <a href="/">Início</a>
-      <a href="/admin/">Acesso Restrito (CMS)</a>
+    <div class="nav-container">
+      <a href="/" class="active">Início</a>
+      <a href="#">Posts</a>
+      <a href="#">Editais</a>
+      <a href="#">Disciplinas</a>
+      <a href="#">Equipe</a>
+      <a href="#">Contato</a>
     </div>
   </nav>
 
-  <main class="content-container">
+  <!-- Conteúdo Central -->
+  <main class="main-wrapper" id="conteudo">
     {{ content | safe }}
   </main>
 
-  <footer>
-    <p>&copy; 2026 Portal Institucional — Desenvolvido com Eleventy e Decap CMS.</p>
+  <!-- Rodapé -->
+  <footer class="ufjf-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>Sobre o Projeto</h4>
+        <p>Ação de extensão universitária com foco em aulas gratuitas e apoio ao ensino para estudantes da comunidade.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Campus Universitário</li>
+          <li><i class="fas fa-envelope"></i> contato@escola.ufjf.br</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociais</h4>
+        <ul>
+          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Escola / Projeto de Extensão. Todos os direitos reservados.
+    </div>
   </footer>
 
 </body>

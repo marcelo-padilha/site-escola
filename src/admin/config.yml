@@ -13,4 +13,5 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Título", name: "title", widget: "string"}
-      - {label: "Conteúdo", name: "body", widget: "markdown"}    
+      - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}  

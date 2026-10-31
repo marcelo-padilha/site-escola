@@ -1,114 +1,102 @@
 ---
 layout: layout.njk
-title: "Projeto de Extensão e Tutoria"
+title: "Projeto de Extensão Tutoria ENEM"
 ---
 
 <style>
-  /* Apresentação Superior */
-  .hero-section {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 2.5rem;
-  }
+  /* Layout de Apresentação (Hero) */
+  .hero-grid { display: grid; grid-template-columns: 4fr 8fr; gap: 20px; margin-bottom: 25px; }
+  .hero-text-card { background: #ffffff; padding: 25px; border-radius: 4px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; }
+  .hero-text-card p { font-size: 0.95rem; color: #444; margin-bottom: 15px; }
+  .btn-ufjf { background: var(--ufjf-blue); color: white; padding: 8px 18px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; display: inline-block; align-self: flex-start; }
+  .btn-ufjf:hover { background: var(--ufjf-blue-hover); }
+  .hero-banner img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-color); min-height: 220px; }
 
-  .hero-section h2 {
-    color: var(--ufjf-blue);
-    margin-bottom: 1rem;
-  }
+  /* Banners de Acesso Rápido */
+  .quick-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 35px; }
+  .quick-card { background: var(--ufjf-blue); color: white; padding: 18px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; text-align: center; font-size: 0.95rem; transition: transform 0.2s, background 0.2s; }
+  .quick-card:hover { transform: translateY(-3px); background: var(--ufjf-blue-hover); }
 
-  /* Secção de Notícias na Parte Inferior */
-  .news-section {
-    margin-top: 2rem;
-  }
+  /* Layout Principal: Notícias (Esquerda) + Lateral (Direita) */
+  .content-grid { display: grid; grid-template-columns: 9fr 3fr; gap: 25px; }
 
-  .news-section-title {
-    color: var(--ufjf-blue);
-    font-size: 1.5rem;
-    border-bottom: 2px solid var(--ufjf-blue);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
+  .section-title { font-size: 1.3rem; color: var(--ufjf-blue); font-weight: bold; border-bottom: 2px solid var(--ufjf-blue); padding-bottom: 5px; margin-bottom: 20px; }
 
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
+  /* Grelha de Notícias */
+  .news-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .news-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+  .news-card-img { width: 100%; height: 160px; object-fit: cover; background: #e2e8f0; }
+  .news-card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .news-card-title { font-size: 1rem; color: var(--ufjf-blue); margin-bottom: 8px; font-weight: bold; text-decoration: none; }
+  .news-card-title:hover { text-decoration: underline; }
+  .news-card-excerpt { font-size: 0.85rem; color: #64748b; margin-bottom: 15px; }
 
-  .news-card {
-    background: #ffffff;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+  /* Barra Lateral (Search) */
+  .sidebar-box { background: #ffffff; border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+  .search-input { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.9rem; }
 
-  .news-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  }
-
-  .news-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .news-card h3 a {
-    color: var(--ufjf-blue);
-    text-decoration: none;
-  }
-
-  .news-card h3 a:hover {
-    text-decoration: underline;
-  }
-
-  .news-excerpt {
-    font-size: 0.9rem;
-    color: #4a5568;
-    margin-bottom: 1rem;
-  }
-
-  .read-more {
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: var(--ufjf-blue);
-    text-decoration: none;
+  @media (max-width: 850px) {
+    .hero-grid, .content-grid { grid-template-columns: 1fr; }
   }
 </style>
 
-<!-- SECÇÃO SUPERIOR: APRESENTAÇÃO DO PROJETO -->
-<section class="hero-section">
-  <h2>Apresentação do Projeto</h2>
-  <p>
-    Bem-vindo ao portal do projeto. Aqui você encontra informações gerais, materiais de apoio, 
-    orientações e todas as atualizações publicadas pela equipe.
-  </p>
-</section>
-
-<!-- SECÇÃO INFERIOR: GRELHA DE NOTÍCIAS -->
-<section class="news-section">
-  <h2 class="news-section-title">Últimas Notícias</h2>
-
-  <div class="news-grid">
-    {% for noticia in collections.noticias | reverse %}
-      <article class="news-card">
-        <div>
-          <h3>
-            <a href="{{ noticia.url }}">{{ noticia.data.title }}</a>
-          </h3>
-          <div class="news-excerpt">
-            {{ noticia.templateContent | safe }}
-          </div>
-        </div>
-        <a href="{{ noticia.url }}" class="read-more">Leia mais &rarr;</a>
-      </article>
-    {% else %}
-      <p>Nenhuma notícia publicada no momento.</p>
-    {% endfor %}
+<!-- 1. APRESENTAÇÃO & BANNER -->
+<section class="hero-grid">
+  <div class="hero-text-card">
+    <div>
+      <p>O <strong>Projeto Tutoria ENEM</strong> é uma ação de extensão vinculada à Universidade. Oferece aulas gratuitas e materiais voltados à preparação dos estudantes.</p>
+    </div>
+    <a href="#" class="btn-ufjf">Apresentação &rarr;</a>
+  </div>
+  <div class="hero-banner">
+    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Banner do Projeto">
   </div>
 </section>
+
+<!-- 2. CARDS DE DESTAQUE / ACESSO RÁPIDO -->
+<section class="quick-cards">
+  <a href="#" class="quick-card"><i class="fas fa-edit"></i> Inscrição</a>
+  <a href="#" class="quick-card"><i class="fas fa-project-diagram"></i> Projetos</a>
+  <a href="#" class="quick-card"><i class="fas fa-book"></i> Publicações</a>
+  <a href="#" class="quick-card"><i class="fas fa-users"></i> Equipe</a>
+  <a href="#" class="quick-card"><i class="fas fa-envelope"></i> Contato</a>
+</section>
+
+<!-- 3. CORPO PRINCIPAL (NOTÍCIAS + BARRA LATERAL) -->
+<div class="content-grid">
+  
+  <!-- Coluna da Esquerda: Grelha de Notícias -->
+  <div>
+    <h2 class="section-title">Destaques e Notícias</h2>
+    <div class="news-list">
+      {% for noticia in collections.noticias | reverse %}
+        <article class="news-card">
+          {% if noticia.data.image %}
+            <img src="{{ noticia.data.image }}" alt="{{ noticia.data.title }}" class="news-card-img">
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=80" alt="Imagem Padrão" class="news-card-img">
+          {% endif %}
+          <div class="news-card-body">
+            <div>
+              <h3><a href="{{ noticia.url }}" class="news-card-title">{{ noticia.data.title }}</a></h3>
+              <div class="news-card-excerpt">
+                {{ noticia.templateContent | safe }}
+              </div>
+            </div>
+          </div>
+        </article>
+      {% else %}
+        <p>Nenhuma notícia cadastrada no CMS no momento.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Coluna da Direita: Pesquisa e Mídia -->
+  <aside>
+    <div class="sidebar-box">
+      <h3 style="font-size: 1rem; color: var(--ufjf-blue); margin-bottom: 10px;">Pesquisar</h3>
+      <input type="text" class="search-input" placeholder="Buscar no site...">
+    </div>
+  </aside>
+
+</div>
