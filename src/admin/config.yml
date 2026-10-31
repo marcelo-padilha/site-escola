@@ -6,11 +6,10 @@ media_folder: "src/uploads"
 public_folder: "/uploads"
 
 collections:
-  - name: "paginas"
-    label: "Páginas da Escola"
-    folder: "src/paginas"
+  - name: "noticias"
+    label: "Notícias da Escola"
+    folder: "src/noticias"
     create: true
-    slug: "{{slug}}"
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Conteúdo", name: "body", widget: "markdown"}

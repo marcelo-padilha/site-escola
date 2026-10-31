@@ -1,7 +1,5 @@
 module.exports = function(eleventyConfig) {
-  // Copia o ficheiro config.yml do CMS para a pasta final
-  eleventyConfig.addPassthroughCopy("src/admin/config.yml");
-
+  eleventyConfig.addPassthroughCopy("src/admin");
   return {
     dir: {
       input: "src",
