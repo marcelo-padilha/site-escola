@@ -1,10 +1,114 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <title>Website da Escola</title>
-</head>
-<body>
-  <h1>Bem-vindo ao site da escola!</h1>
-</body>
-</html>
+---
+layout: layout.njk
+title: "Projeto de Extensão e Tutoria"
+---
+
+<style>
+  /* Apresentação Superior */
+  .hero-section {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-section h2 {
+    color: var(--ufjf-blue);
+    margin-bottom: 1rem;
+  }
+
+  /* Secção de Notícias na Parte Inferior */
+  .news-section {
+    margin-top: 2rem;
+  }
+
+  .news-section-title {
+    color: var(--ufjf-blue);
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--ufjf-blue);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .news-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .news-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-card h3 a {
+    color: var(--ufjf-blue);
+    text-decoration: none;
+  }
+
+  .news-card h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .news-excerpt {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+  }
+
+  .read-more {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--ufjf-blue);
+    text-decoration: none;
+  }
+</style>
+
+<!-- SECÇÃO SUPERIOR: APRESENTAÇÃO DO PROJETO -->
+<section class="hero-section">
+  <h2>Apresentação do Projeto</h2>
+  <p>
+    Bem-vindo ao portal do projeto. Aqui você encontra informações gerais, materiais de apoio, 
+    orientações e todas as atualizações publicadas pela equipe.
+  </p>
+</section>
+
+<!-- SECÇÃO INFERIOR: GRELHA DE NOTÍCIAS -->
+<section class="news-section">
+  <h2 class="news-section-title">Últimas Notícias</h2>
+
+  <div class="news-grid">
+    {% for noticia in collections.noticias | reverse %}
+      <article class="news-card">
+        <div>
+          <h3>
+            <a href="{{ noticia.url }}">{{ noticia.data.title }}</a>
+          </h3>
+          <div class="news-excerpt">
+            {{ noticia.templateContent | safe }}
+          </div>
+        </div>
+        <a href="{{ noticia.url }}" class="read-more">Leia mais &rarr;</a>
+      </article>
+    {% else %}
+      <p>Nenhuma notícia publicada no momento.</p>
+    {% endfor %}
+  </div>
+</section>

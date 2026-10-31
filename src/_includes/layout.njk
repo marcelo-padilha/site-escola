@@ -3,67 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "Escola Nyrce" }}</title>
+  <title>{{ title or "Projeto de Extensão e Tutoria" }}</title>
   <style>
     :root {
-      --primary: #1e3a8a;
-      --secondary: #2563eb;
-      --bg: #f8fafc;
-      --text: #1e293b;
+      --ufjf-blue: #003366;
+      --ufjf-blue-hover: #002244;
+      --bg-light: #f4f6f9;
+      --text-dark: #222222;
+      --border-color: #e2e8f0;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
       line-height: 1.6;
     }
-    header {
-      background: var(--primary);
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
+
+    /* Cabeçalho Institucional */
+    header.main-header {
+      background-color: var(--ufjf-blue);
+      color: #ffffff;
+      padding: 1.5rem 2rem;
+      border-bottom: 4px solid #1a4d80;
     }
-    header h1 { margin: 0; font-size: 2rem; }
-    nav { margin-top: 1rem; }
-    nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
-    main {
-      max-width: 800px;
+
+    header.main-header .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header.main-header h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    header.main-header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* Navegação */
+    nav.main-nav {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    nav.main-nav .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0.8rem 2rem;
+    }
+
+    nav.main-nav a {
+      color: var(--ufjf-blue);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    nav.main-nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Conteúdo Principal */
+    .content-container {
+      max-width: 1100px;
       margin: 2rem auto;
-      padding: 0 1rem;
+      padding: 0 2rem;
     }
-    .card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 1.5rem;
-    }
-    .card h2 a { color: var(--secondary); text-decoration: none; }
-    .card h2 a:hover { text-decoration: underline; }
+
+    /* Rodapé */
     footer {
+      background-color: #1e293b;
+      color: #ffffff;
       text-align: center;
       padding: 2rem;
-      color: #64748b;
-      font-size: 0.9rem;
+      margin-top: 3rem;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Escola Nyrce</h1>
-    <nav>
-      <a href="/">Início</a>
-      <a href="/admin/">Painel de Gestão</a>
-    </nav>
+
+  <header class="main-header">
+    <div class="container">
+      <h1>{{ title or "Projeto de Extensão / Escola" }}</h1>
+      <p>Portal Institucional e Informativo</p>
+    </div>
   </header>
 
-  <main>
+  <nav class="main-nav">
+    <div class="container">
+      <a href="/">Início</a>
+      <a href="/admin/">Acesso Restrito (CMS)</a>
+    </div>
+  </nav>
+
+  <main class="content-container">
     {{ content | safe }}
   </main>
 
   <footer>
-    <p>&copy; 2026 Escola Nyrce — Todos os direitos reservados.</p>
+    <p>&copy; 2026 Portal Institucional — Desenvolvido com Eleventy e Decap CMS.</p>
   </footer>
+
 </body>
 </html>
