@@ -18,22 +18,25 @@ collections:
       - {label: "Conteúdo", name: "body", widget: "markdown"}
 
   # 2. PÁGINA PRINCIPAL (INDEX)
+ # 2. PÁGINA PRINCIPAL (INDEX)
   - name: "home_page"
     label: "Página Principal (Início)"
     delete: false
+    editor:
+      preview: false
     files:
       - name: "index"
         label: "Editar Página Inicial (Index)"
         file: "src/index.njk"
         fields:
-          - {label: "Título do Site", name: "title", widget: "string", default: "Projeto de Extensão Tutoria ENEM"}
+          - {label: "Título do Site", name: "title", widget: "string", default: "E. E. Nyrce Villa Verde Coelho de Magalhães"}
           - label: "Apresentação Principal"
             name: "hero"
             widget: "object"
             fields:
               - {label: "Texto explicativo", name: "text", widget: "text"}
-              - {label: "Texto do Botão", name: "button_text", widget: "string", default: "Apresentação"}
-              - {label: "Link do Botão", name: "button_link", widget: "string", default: "/apresentacao"}
+              - {label: "Texto do Botão", name: "button_text", widget: "string", default: "Matrícula"}
+              - {label: "Link do Botão", name: "button_link", widget: "string", default: "/matricula"}
               - {label: "Imagem do Banner", name: "banner_image", widget: "image", required: false}
           - label: "Banners de Acesso Rápido"
             name: "quick_cards"
