@@ -1,4 +1,4 @@
 {
-  "tags": "noticias",
-  "layout": "layout.njk"
+  "tags": ["noticias"],
+  "layout": "noticia.njk"
 }

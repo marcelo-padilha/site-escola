@@ -3,129 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "Projeto de Extensão — Escola" }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <meta name="theme-color" content="#123b63">
+  <title>{% if title and title != 'Página inicial' %}{{ title }} | {% endif %}{{ site.title }}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    :root {
-      --ufjf-blue: #003366;
-      --ufjf-blue-hover: #001f3f;
-      --ufjf-card-bg: #003366;
-      --bg-light: #f4f6f9;
-      --text-main: #333333;
-      --border-color: #e2e8f0;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.5; }
-
-    /* Barra do Governo / Acessibilidade superior */
-    .top-bar { background: #002244; color: #ffffff; font-size: 0.8rem; padding: 4px 0; }
-    .top-bar .container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; }
-    .top-bar a { color: #ffffff; text-decoration: none; margin-left: 15px; }
-
-    /* Cabeçalho Institucional */
-    header.ufjf-header { background: #ffffff; border-bottom: 3px solid var(--ufjf-blue); padding: 15px 0; }
-    .header-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; gap: 20px; }
-    .header-logo img { height: 50px; }
-    .header-title h1 { font-size: 1.5rem; color: var(--ufjf-blue); font-weight: 700; margin: 0; }
-    .header-title h1 a { color: inherit; text-decoration: none; }
-
-    /* Menu Navegação */
-    nav.main-nav { background: var(--ufjf-blue); }
-    .nav-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: flex; flex-wrap: wrap; }
-    .nav-container a { color: #ffffff; text-decoration: none; padding: 12px 18px; font-weight: 600; font-size: 0.9rem; display: block; transition: background 0.2s; }
-    .nav-container a:hover, .nav-container a.active { background: rgba(255,255,255,0.15); }
-
-    /* Container Conteúdo */
-    .main-wrapper { max-width: 1140px; margin: 25px auto; padding: 0 15px; }
-
-    /* Rodapé */
-    footer.ufjf-footer { background: #1a202c; color: #cbd5e1; margin-top: 40px; padding: 40px 0 20px; font-size: 0.88rem; }
-    .footer-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; }
-    .footer-col h4 { color: #ffffff; margin-bottom: 12px; font-size: 1rem; border-bottom: 2px solid var(--ufjf-blue); padding-bottom: 5px; display: inline-block; }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 8px; }
-    .footer-col a { color: #cbd5e1; text-decoration: none; }
-    .footer-col a:hover { color: #ffffff; }
-    .footer-bottom { text-align: center; border-top: 1px solid #334155; margin-top: 30px; padding-top: 15px; font-size: 0.8rem; color: #94a3b8; }
-
-    @media (max-width: 768px) {
-      .footer-container { grid-template-columns: 1fr; }
-      .header-container { flex-direction: column; text-align: center; }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- Barra Superior -->
   <div class="top-bar">
-    <div class="container">
-      <span>Portal Institucional</span>
-      <div>
-        <a href="#conteudo">Ir para o conteúdo</a>
-        <a href="/admin/">Acesso Restrito</a>
-      </div>
+    <div class="site-container top-bar-inner">
+      <span>{{ site.topbar_text or 'Portal institucional' }}</span>
+      <a href="/admin/"><i class="fas fa-lock" aria-hidden="true"></i> Área administrativa</a>
     </div>
   </div>
 
-  <!-- Cabeçalho -->
-  <header class="ufjf-header">
-    <div class="header-container">
-      <div class="header-logo">
-        <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="8" fill="#003366"/>
-          <path d="M20 30H80V40H20V30ZM20 48H80V58H20V48ZM20 66H55V76H20V66Z" fill="white"/>
-        </svg>
-      </div>
-      <div class="header-title">
-        <h1><a href="/">{{ title or "Projeto de Extensão Tutoria ENEM" }}</a></h1>
-      </div>
+  <header class="site-header">
+    <div class="site-container header-inner">
+      <a class="brand" href="/" aria-label="{{ site.title }} — página inicial">
+        {% if site.logo %}
+          <img class="brand-logo" src="{{ site.logo }}" alt="Logotipo de {{ site.short_title or site.title }}">
+        {% else %}
+          <span class="brand-symbol" aria-hidden="true"><i class="fas fa-book-open"></i></span>
+        {% endif %}
+        <span class="brand-text">
+          <strong>{{ site.title }}</strong>
+          {% if site.short_title %}<small>{{ site.short_title }}</small>{% endif %}
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-menu-toggle>
+        <span class="sr-only">Abrir menu</span>
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
     </div>
   </header>
 
-  <!-- Navegação -->
-  <nav class="main-nav">
-    <div class="nav-container">
-      <a href="/" class="active">Início</a>
-      <a href="#">Posts</a>
-      <a href="#">Editais</a>
-      <a href="#">Disciplinas</a>
-      <a href="#">Equipe</a>
-      <a href="#">Contato</a>
+  <nav class="main-nav" aria-label="Navegação principal" id="site-navigation" data-site-nav>
+    <div class="site-container nav-inner">
+      {% for item in site.navigation %}
+        <a href="{{ item.url }}"{% if page.url == item.url %} class="active" aria-current="page"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
     </div>
   </nav>
 
-  <!-- Conteúdo Central -->
-  <main class="main-wrapper" id="conteudo">
+  <main class="site-container main-content" id="conteudo">
     {{ content | safe }}
   </main>
 
-  <!-- Rodapé -->
-  <footer class="ufjf-footer">
-    <div class="footer-container">
-      <div class="footer-col">
-        <h4>Sobre o Projeto</h4>
-        <p>Ação de extensão universitária com foco em aulas gratuitas e apoio ao ensino para estudantes da comunidade.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Contato</h4>
+  <footer class="site-footer">
+    <div class="site-container footer-grid">
+      <section class="footer-about">
+        <h2>{{ site.footer.about_title or 'Sobre' }}</h2>
+        {% if site.footer.about_text %}<p>{{ site.footer.about_text }}</p>{% endif %}
+      </section>
+
+      {% if site.footer.address or site.footer.email or site.footer.phone %}
+      <section class="footer-contact">
+        <h2>{{ site.footer.contact_title or 'Contato' }}</h2>
         <ul>
-          <li><i class="fas fa-map-marker-alt"></i> Campus Universitário</li>
-          <li><i class="fas fa-envelope"></i> contato@escola.ufjf.br</li>
+          {% if site.footer.address %}<li><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>{{ site.footer.address }}</span></li>{% endif %}
+          {% if site.footer.email %}<li><i class="far fa-envelope" aria-hidden="true"></i><a href="mailto:{{ site.footer.email }}">{{ site.footer.email }}</a></li>{% endif %}
+          {% if site.footer.phone %}<li><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:{{ site.footer.phone }}">{{ site.footer.phone }}</a></li>{% endif %}
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Redes Sociais</h4>
+      </section>
+      {% endif %}
+
+      {% if site.footer.social_links and site.footer.social_links.length %}
+      <section class="footer-social">
+        <h2>Redes sociais</h2>
         <ul>
-          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-          <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+          {% for social in site.footer.social_links %}
+            {% if social.label and social.url %}<li><a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">{{ social.label }} <i class="fas fa-external-link-alt" aria-hidden="true"></i></a></li>{% endif %}
+          {% endfor %}
         </ul>
-      </div>
+      </section>
+      {% endif %}
     </div>
-    <div class="footer-bottom">
-      &copy; 2026 Escola / Projeto de Extensão. Todos os direitos reservados.
+    <div class="site-container footer-bottom">
+      <p>© {{ site.footer.copyright or site.title }}</p>
+      <a href="#topo" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo ↑</a>
     </div>
   </footer>
 
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>

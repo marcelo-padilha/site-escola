@@ -1,23 +1,21 @@
 {
   "name": "site-escola",
   "version": "1.0.0",
-  "description": "",
+  "description": "Portal institucional estático com Eleventy e Decap CMS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node ./node_modules/@11ty/eleventy/cmd.cjs --serve",
+    "build": "node ./node_modules/@11ty/eleventy/cmd.cjs",
+    "cms:proxy": "npx decap-server"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marcelo-padilha/site-escola.git"
   },
-  "keywords": [],
+  "keywords": ["eleventy", "decap-cms", "site-institucional"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/marcelo-padilha/site-escola/issues"
-  },
-  "homepage": "https://github.com/marcelo-padilha/site-escola#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.7"
   }

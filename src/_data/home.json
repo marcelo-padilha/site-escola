@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "EDUCAÇÃO • ESCOLA ",
+    "heading": "Bem-vindo ao portal da nossa escola",
+    "text": "Este é o espaço institucional da Escola Estadual Nyrce Villa Verde Coelho de Magalhães. Aqui, estudantes, famílias e profissionais da educação poderão acompanhar notícias, comunicados, projetos e orientações da comunidade escolar.",
+    "button_text": "Conheça a escola",
+    "button_link": "/apresentacao/",
+    "banner_image": "/uploads/captura-de-tela-2026-10-29-213153.png",
+    "banner_alt": ""
+  },
+  "quick_cards": [
+    {
+      "title": "Apresentação institucional",
+      "link": "/apresentacao/",
+      "icon": "fas fa-edit"
+    },
+    {
+      "title": "Notícias",
+      "link": "/noticias/",
+      "icon": "fas fa-newspaper"
+    }
+  ],
+  "news_section": {
+    "title": "Destaques e notícias",
+    "description": "Acompanhe as notícias, atividades e informações da comunidade escolar.",
+    "limit": 6
+  },
+  "sidebar": {
+    "title": "Acesso rápido",
+    "text": "Acesse as informações institucionais e acompanhe as publicações da escola.",
+    "links": [
+      {
+        "title": "Conheça a escola",
+        "url": "/apresentacao/"
+      },
+      {
+        "title": "Acompanhe as notícias",
+        "url": "/noticias/"
+      }
+    ]
+  }
+}

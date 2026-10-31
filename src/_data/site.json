@@ -1,0 +1,31 @@
+{
+  "title": "Escola Estadual Nyrce Villa Verde Coelho de Magalhães",
+  "short_title": "E. E. Nyrce Villa Verde",
+  "description": "Portal institucional da Escola Estadual Nyrce Villa Verde Coelho de Magalhães.",
+  "logo": "",
+  "topbar_text": "Portal institucional",
+  "navigation": [
+    {
+      "label": "Início",
+      "url": "/"
+    },
+    {
+      "label": "Apresentação",
+      "url": "/apresentacao/"
+    },
+    {
+      "label": "Notícias",
+      "url": "/noticias/"
+    }
+  ],
+  "footer": {
+    "about_title": "Sobre a escola",
+    "about_text": "Portal institucional da Escola Estadual Nyrce Villa Verde Coelho de Magalhães. Este espaço reúne informações, orientações e comunicados para a comunidade escolar.",
+    "contact_title": "Contato",
+    "address": "",
+    "email": "",
+    "phone": "",
+    "social_links": [],
+    "copyright": "Escola Estadual Nyrce Villa Verde Coelho de Magalhães. Todos os direitos reservados."
+  }
+}

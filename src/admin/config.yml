@@ -2,68 +2,147 @@ backend:
   name: git-gateway
   branch: main
 
+# Ativa o proxy local apenas durante o desenvolvimento. No Netlify,
+# o CMS continua utilizando o Git Gateway configurado acima.
+local_backend: true
+
 media_folder: "src/uploads"
 public_folder: "/uploads"
 
-collections:
-  # 1. NOTÍCIAS
-  - name: "noticias"
-    label: "Notícias da Escola"
-    folder: "src/noticias"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
-      - {label: "Conteúdo", name: "body", widget: "markdown"}
+# Mensagens de commit claras no histórico do GitHub.
+commit_messages:
+  create: "Conteúdo: cria {{collection}} '{{slug}}'"
+  update: "Conteúdo: atualiza {{collection}} '{{slug}}'"
+  delete: "Conteúdo: remove {{collection}} '{{slug}}'"
+  uploadMedia: "Mídia: envia '{{path}}'"
+  deleteMedia: "Mídia: remove '{{path}}'"
 
-  # 2. PÁGINA PRINCIPAL (INDEX)
- # 2. PÁGINA PRINCIPAL (INDEX)
-  - name: "home_page"
-    label: "Página Principal (Início)"
-    delete: false
-    editor:
-      preview: false
+collections:
+  # 1. PÁGINA INICIAL
+  - name: "home"
+    label: "Página inicial"
     files:
       - name: "index"
-        label: "Editar Página Inicial (Index)"
-        file: "src/index.njk"
+        label: "Editar página inicial"
+        file: "src/_data/home.json"
         fields:
-          - {label: "Título do Site", name: "title", widget: "string", default: "E. E. Nyrce Villa Verde Coelho de Magalhães"}
-          - label: "Apresentação Principal"
+          - label: "1. Apresentação principal"
             name: "hero"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "Texto explicativo", name: "text", widget: "text"}
-              - {label: "Texto do Botão", name: "button_text", widget: "string", default: "Matrícula"}
-              - {label: "Link do Botão", name: "button_link", widget: "string", default: "/matricula"}
-              - {label: "Imagem do Banner", name: "banner_image", widget: "image", required: false}
-          - label: "Banners de Acesso Rápido"
+              - { label: "Texto pequeno acima do título", name: "eyebrow", widget: "string", required: false }
+              - { label: "Título principal", name: "heading", widget: "string" }
+              - { label: "Texto de apresentação", name: "text", widget: "text" }
+              - { label: "Texto do botão", name: "button_text", widget: "string", required: false }
+              - { label: "Destino do botão", name: "button_link", widget: "string", required: false, hint: "Exemplo: /apresentacao/ ou https://exemplo.com" }
+              - { label: "Imagem de destaque", name: "banner_image", widget: "image", required: false }
+              - { label: "Descrição da imagem (acessibilidade)", name: "banner_alt", widget: "string", required: false }
+          - label: "2. Acessos rápidos"
             name: "quick_cards"
             widget: "list"
+            required: false
+            summary: "{{fields.title}}"
+            hint: "Adicione, remova ou reorganize os cartões exibidos logo abaixo da apresentação."
             fields:
-              - {label: "Título do Card", name: "title", widget: "string"}
-              - {label: "Link do Card", name: "link", widget: "string"}
-              - {label: "Ícone FontAwesome", name: "icon", widget: "string", default: "fas fa-link"}
-          - label: "Barra Lateral"
-            name: "sidebar"
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Link de destino", name: "link", widget: "string", hint: "Exemplo: /apresentacao/" }
+              - { label: "Ícone (opcional)", name: "icon", widget: "string", required: false, hint: "Classes Font Awesome, por exemplo: fa-solid fa-book-open" }
+          - label: "3. Área de notícias"
+            name: "news_section"
             widget: "object"
             fields:
-              - {label: "Título do Bloco", name: "title", widget: "string", default: "Pesquisar"}
-              - {label: "Texto de Ajuda na Busca", name: "search_placeholder", widget: "string", default: "Buscar no site..."}
+              - { label: "Título da seção", name: "title", widget: "string" }
+              - { label: "Texto de apresentação", name: "description", widget: "string", required: false }
+              - { label: "Quantidade de notícias", name: "limit", widget: "number", min: 1, max: 12, value_type: "int", default: 6 }
+          - label: "4. Caixa de acesso rápido lateral"
+            name: "sidebar"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Título", name: "title", widget: "string", required: false }
+              - { label: "Texto", name: "text", widget: "text", required: false }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Texto do link", name: "title", widget: "string" }
+                  - { label: "Endereço", name: "url", widget: "string" }
 
-  # 3. NOVAS PÁGINAS E SUBPÁGINAS
+  # 2. CONFIGURAÇÕES INSTITUCIONAIS
+  - name: "configuracoes"
+    label: "Identidade e configurações"
+    files:
+      - name: "site"
+        label: "Identidade, menu e rodapé"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Nome do site", name: "title", widget: "string" }
+          - { label: "Nome curto", name: "short_title", widget: "string", required: false }
+          - { label: "Descrição do site", name: "description", widget: "text", required: false }
+          - { label: "Logotipo", name: "logo", widget: "image", required: false }
+          - { label: "Texto da barra superior", name: "topbar_text", widget: "string", required: false }
+          - label: "Menu principal"
+            name: "navigation"
+            widget: "list"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Nome do item", name: "label", widget: "string" }
+              - { label: "Endereço", name: "url", widget: "string", hint: "Exemplo: /apresentacao/" }
+          - label: "Rodapé"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Título da apresentação", name: "about_title", widget: "string", required: false }
+              - { label: "Texto sobre o projeto/instituição", name: "about_text", widget: "text", required: false }
+              - { label: "Título da área de contato", name: "contact_title", widget: "string", required: false }
+              - { label: "Endereço", name: "address", widget: "string", required: false }
+              - { label: "E-mail", name: "email", widget: "string", required: false }
+              - { label: "Telefone", name: "phone", widget: "string", required: false }
+              - label: "Redes sociais"
+                name: "social_links"
+                widget: "list"
+                required: false
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Nome da rede", name: "label", widget: "string" }
+                  - { label: "Endereço do perfil", name: "url", widget: "string" }
+              - { label: "Texto de direitos autorais", name: "copyright", widget: "string", required: false }
+
+  # 3. NOTÍCIAS E COMUNICADOS
+  - name: "noticias"
+    label: "Notícias e comunicados"
+    folder: "src/noticias"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Modelo de página", name: "layout", widget: "hidden", default: "noticia.njk" }
+      - { label: "Título da publicação", name: "title", widget: "string" }
+      - { label: "Data de publicação", name: "date", widget: "datetime", date_format: "DD/MM/YYYY", time_format: "HH:mm", format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: "Resumo", name: "description", widget: "text", hint: "Uma apresentação curta que aparecerá nos cartões de notícia." }
+      - { label: "Imagem de capa", name: "image", widget: "image", required: false }
+      - { label: "Descrição da imagem", name: "image_alt", widget: "string", required: false }
+      - { label: "Publicação em destaque", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Conteúdo da publicação", name: "body", widget: "markdown" }
+
+  # 4. PÁGINAS E SUBPÁGINAS
   - name: "paginas"
-    label: "Páginas do Site (Subpáginas)"
+    label: "Páginas e subpáginas"
     folder: "src/paginas"
     create: true
+    delete: true
     slug: "{{slug}}"
-    summary: "{{title}} — Link: https://nyrce-villa-verde.netlify.app/{{slug}}/"
+    summary: "{{title}}"
+    sortable_fields: ["title"]
+    preview_path: "{{slug}}"
     fields:
-      - {
-          label: "Título da Página", 
-          name: "title", 
-          widget: "string", 
-          hint: "O endereço final será: https://nyrce-villa-verde.netlify.app/[titulo-da-pagina]/"
-        }
-      - {label: "Conteúdo", name: "body", widget: "markdown"}
+      - { label: "Modelo de página", name: "layout", widget: "hidden", default: "pagina.njk" }
+      - { label: "Título da página", name: "title", widget: "string" }
+      - { label: "Descrição (opcional)", name: "description", widget: "text", required: false }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
