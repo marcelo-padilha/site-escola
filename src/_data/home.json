@@ -28,7 +28,7 @@
   "news_section": {
     "title": "Destaques e notícias",
     "description": "Acompanhe as notícias, atividades e informações da comunidade escolar.",
-    "limit": 6
+    "limit": 3
   },
   "sidebar": {
     "title": "Acesso rápido",
